@@ -3,11 +3,13 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import Chart from './Chart';
 import {Bar, Line, Pie} from 'react-chartjs-2';
 import FlatButton from 'material-ui/FlatButton';
-
+import Toggle from 'material-ui/Toggle';
+import ChartToTable from './ChartToTable';
 class LineChart extends Component{
 constructor(props){
 	super(props);
-	this.handleChange=this.handleChange.bind(this);
+	this.handleChange = this.handleChange.bind(this);
+    this.handleTable = this.handleTable.bind(this);
 	this.state={
 		chartData: {
         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -16,23 +18,20 @@ constructor(props){
             data: [19,50,22,10,5,44],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
             ],
             borderColor: [
                 'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
             ],
-            borderWidth: 2
+            borderWidth: 2,
+            pointHoverBackgroundColor:'green',
+            pointHoverBorderColor:'green',
+            pointRadius:4,
+
         }]
     },
+
+        status:true
+
 			}
 }
 handleChange(){
@@ -43,41 +42,60 @@ handleChange(){
             data: [Math.floor(Math.random()*50),Math.floor(Math.random()*50),Math.floor(Math.random()*50),Math.floor(Math.random()*50),Math.floor(Math.random()*50),Math.floor(Math.random()*50)],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
             ],
             borderColor: [
                 'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
             ],
-            borderWidth: 2
+            borderWidth: 2,
+            pointHoverBackgroundColor:'green',
+            pointHoverBorderColor:'green',
+            pointRadius:4,
+
         }]
-    },})
+        },
+    })
+}
+
+handleTable(){
+    this.setState({status:!this.state.status})
+    console.log(this.state.status);
 }
 render(){
-	return(
+    console.log(this.state.status)
+	
+if(this.state.status){
+    return(
 		  <Card>
     <CardHeader
       title="Revenue"
       subtitle="by Year"
-      
     />
     <CardMedia>
-    	<Line data={this.state.chartData}/>
+        <Line data={this.state.chartData} />
     </CardMedia>
     <CardActions>
-      <FlatButton label="Random" onClick={this.handleChange} />
-      
+        <FlatButton label="Random" onClick={this.handleChange} />
+        <FlatButton label={(this.state.status)?"Table":"Graph"} onClick={this.handleTable}/>
     </CardActions>
-  </Card>
-		)
+  </Card>)
+}
+else{
+    return(
+      <Card>
+    <CardHeader
+      title="Revenue"
+      subtitle="by Year"
+    />
+    <CardMedia>
+        <ChartToTable labelHeading="Color" dataHeading="Price" labels={this.state.chartData.labels} data={this.state.chartData.datasets[0].data}/>
+    </CardMedia>
+    <CardActions>
+        <FlatButton label="Random" onClick={this.handleChange} />
+        <FlatButton label={(this.state.status)?"Table":"Graph"} onClick={this.handleTable}/>
+    </CardActions>
+  </Card>   
+  )
+}
 }
 }
 

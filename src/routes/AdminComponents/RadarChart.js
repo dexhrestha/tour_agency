@@ -3,68 +3,92 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import Chart from './Chart';
 import {Bar, Line, Pie, Radar} from 'react-chartjs-2';
 import FlatButton from 'material-ui/FlatButton';
-
-class RadarChart extends Component{
+import Toggle from 'material-ui/Toggle';
+import ChartToTable from './ChartToTable';
+class LineChart extends Component{
 constructor(props){
-	super(props);
-    this.handleClick = this.handleClick.bind(this);
-	this.state={
-		chartData: {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleTable = this.handleTable.bind(this);
+    this.state={
+        chartData: {
         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
         datasets: [{
             label: '# of Votes',
             data: [19,50,22,10,5,44],
             backgroundColor: [
-                'rgba(153, 102, 255, 0.2)',
-                
+                'rgba(255, 99, 132, 0.2)',
             ],
             borderColor: [
-                'rgba(153, 102, 255, 1)',
-                
+                'rgba(255,99,132,1)',
             ],
             borderWidth: 2
         }]
-    }
-			}
+    },
 
+        status:true
+
+            }
 }
-handleClick(){
-    console.log("click")
-    this.setState({chartData:{
+handleChange(){
+    this.setState({chartData: {
         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
         datasets: [{
             label: '# of Votes',
             data: [Math.floor(Math.random()*50),Math.floor(Math.random()*50),Math.floor(Math.random()*50),Math.floor(Math.random()*50),Math.floor(Math.random()*50),Math.floor(Math.random()*50)],
             backgroundColor: [
-                'rgba(153, 102, 255, 0.2)',
-                
+                'rgba(255, 99, 132, 0.2)',
             ],
             borderColor: [
-                'rgba(153, 102, 255, 1)',
-                
+                'rgba(255,99,132,1)',
             ],
             borderWidth: 2
         }]
-    }})
+        },
+    })
+}
+
+handleTable(){
+    this.setState({status:!this.state.status})
+    console.log(this.state.status);
 }
 render(){
-	return(
-		  <Card>
+    console.log(this.state.status)
+    
+if(this.state.status){
+    return(
+          <Card>
     <CardHeader
       title="Revenue"
       subtitle="by Year"
-      
     />
     <CardMedia>
-    	<Radar data={this.state.chartData}/>
+        <Radar data={this.state.chartData} />
     </CardMedia>
     <CardActions>
-      <FlatButton label="Random" onClick={this.handleClick}/>
-      
+        <FlatButton labelHeading="Color" dataHeading="Price" label="Random" onClick={this.handleChange} />
+        <FlatButton label={(this.state.status)?"Table":"Graph"} onClick={this.handleTable}/>
     </CardActions>
-  </Card>
-		)
+  </Card>)
+}
+else{
+    return(
+      <Card>
+    <CardHeader
+      title="Revenue"
+      subtitle="by Year"
+    />
+    <CardMedia>
+        <ChartToTable labelHeading="Color" dataHeading="Price" labels={this.state.chartData.labels} data={this.state.chartData.datasets[0].data}/>
+    </CardMedia>
+    <CardActions>
+        <FlatButton label="Random" onClick={this.handleChange} />
+        <FlatButton label={(this.state.status)?"Table":"Graph"} onClick={this.handleTable}/>
+    </CardActions>
+  </Card>   
+  )
+}
 }
 }
 
-export default RadarChart;
+export default LineChart;
