@@ -5,6 +5,7 @@ import {Bar, Line, Pie} from 'react-chartjs-2';
 import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
 import ChartToTable from './ChartToTable';
+
 class LineChart extends Component{
 constructor(props){
 	super(props);
@@ -71,7 +72,7 @@ if(this.state.status){
       subtitle="by Year"
     />
     <CardMedia>
-        <Line data={this.state.chartData} />
+        <Line className="animated slideInDown" data={this.state.chartData} />
     </CardMedia>
     <CardActions>
         <FlatButton label="Random" onClick={this.handleChange} />

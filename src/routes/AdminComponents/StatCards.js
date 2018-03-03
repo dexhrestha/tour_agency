@@ -1,7 +1,7 @@
 import React ,{Component} from 'react';
 import Paper from 'material-ui/Paper';
 import SvgIcon from 'material-ui/SvgIcon';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'mdbootstrap/css/bootstrap.css';
 import NotificationSms from 'material-ui/svg-icons/notification/sms';
 class StatCards extends Component{
 	constructor(props){

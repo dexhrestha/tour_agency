@@ -15,7 +15,7 @@ class ChartToTable extends Component{
 
 	render(){
 		return(
-			<Table>
+			<Table className="animated slideInUp">
 				<TableHeader>
 					<TableRow>
 						<TableHeaderColumn>ID</TableHeaderColumn>

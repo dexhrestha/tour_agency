@@ -63,7 +63,7 @@ if(this.state.status){
       subtitle="by Year"
     />
     <CardMedia>
-        <Radar data={this.state.chartData} />
+        <Radar  className="animated slideInDown" data={this.state.chartData} />
     </CardMedia>
     <CardActions>
         <FlatButton labelHeading="Color" dataHeading="Price" label="Random" onClick={this.handleChange} />
@@ -79,7 +79,9 @@ else{
       subtitle="by Year"
     />
     <CardMedia>
+        
         <ChartToTable labelHeading="Color" dataHeading="Price" labels={this.state.chartData.labels} data={this.state.chartData.datasets[0].data}/>
+        
     </CardMedia>
     <CardActions>
         <FlatButton label="Random" onClick={this.handleChange} />

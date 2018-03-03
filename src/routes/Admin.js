@@ -7,7 +7,8 @@ import Paper from 'material-ui/Paper';
 import LineChart from './AdminComponents/LineChart';
 import RadarChart from './AdminComponents/RadarChart';
 
-import 'bootstrap/dist/css/bootstrap.css';
+import 'mdbootstrap/css/bootstrap.css';
+import 'mdbootstrap/css/mdb.css'
 class Admin extends Component{
 	constructor(props){
 		super(props);
@@ -31,8 +32,8 @@ class Admin extends Component{
 	        	</div>
 	        	<div className="col-md-4 col-lg-4">
 	        	<RadarChart />
+
 	        	</div>
-	        	
 	        	</div>
 	        	
 	        		
